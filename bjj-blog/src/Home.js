@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Home = () => {
 const handleClick = (e) => {
@@ -15,6 +15,10 @@ const nameButton = () => {
 //let name = 'Kimura';
 const [name, setName ] = useState('Kimura');
 const [status, setStatus] = useState('Completed');
+
+useEffect(() => {
+    console.log('use effect ran from home');
+    });
 
     return ( 
         <div className="home">
