@@ -1,0 +1,22 @@
+{
+    "blogs": [
+        {
+            "title": "My first day as a White belt",
+            "body" : "Lorem ipsum dores tores .....",
+            "author" : "MM",
+            "id" : "1"
+        },
+        {
+            "title": "My first day as a Blue belt",
+            "body" : "Lorem ipsum dores tores .....",
+            "author" : "BM",
+            "id" : "2"
+        },
+        {
+            "title": "My first day as a Purple belt",
+            "body" : "Lorem ipsum dores tores .....",
+            "author" : "CT",
+            "id" : "3"
+        }
+    ]
+}

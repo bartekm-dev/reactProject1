@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const Home = () => {
+
 const handleClick = (e) => {
     console.log('Hello my nigga', e);
 }

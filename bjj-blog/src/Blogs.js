@@ -2,29 +2,39 @@ import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Blogs = () => {
-    const [blogs, setBlogs] = useState([
-        {title: "White belt problems", body:"White Belt problems are: ...", author:'BM', id: 1 },
-        {title: "Blue belt problems", body:"Blue Belt problems are: ...", author:'TP', id: 2 },
-        {title: "Purple belt problems", body:"Purple Belt problems are: ...", author:'CD', id: 3 },
-        {title: "Brown belt problems", body:"Brown Belt problems are: ...", author:'CJ', id: 4 },
-        {title: "Black belt problems", body:"Black Belt problems are: ...", author:'BM', id: 5 }
-
-    ])
-    const deleteBlog = (id) => {
-        const newBlogs = blogs.filter(blog => blog.id !== id);
-        setBlogs(newBlogs);
-    }
+    const [isLoading, setIsLoading] = useState(true);
+    const [blogs, setBlogs] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log('effect hook ran from blogs');
-        console.log(blogs);
-    });
+        setTimeout(() => {fetch('http://localhost:8000/blogss')
+        .then(res => {
+            if (res.ok){
+                return res.json();
+            } else {
+                throw Error('Could not fetch the data for that resource')
+            }
+            
+        })
+        .then((data) => {
+            setBlogs(data);
+            setIsLoading(false);
+            setError(null);
+        })
+        .catch((err) => {
+            setError(err.message)
+            setIsLoading(false);
+        })   }, 1000)     
+    },[]);
 
     return ( 
         <div className="home">
-            <BlogList blogs={blogs} title="All things are here" deleteBlog={deleteBlog}/>
-            <BlogList blogs={blogs.filter((blogs)=> blogs.author==='BM')} title="All Blogs by BM" />
+            {error && <div>{ error }</div>}
+            {isLoading && <div id="loader">Loading.....</div>}
+            {blogs && <BlogList blogs={blogs} title="All things are here" />}
+            {blogs && <BlogList blogs={blogs.filter((blogs)=> blogs.author==='BM')} title="All Blogs by BM" />}
         </div>
+        
      );
 }
  
